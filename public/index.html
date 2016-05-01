@@ -6,7 +6,9 @@
         <title>Alurapic</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/efeitos-app.css">
         <script type="text/javascript" src="js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="js/lib/angular-animate.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/controllers/fotos-controller.js"></script>
         <script type="text/javascript" src="js/directives/minhas-diretivas.js"></script>
@@ -16,11 +18,22 @@
             <div class="jumbotron">
                 <h1 class="text-center">Alurapic</h1>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form>
+                        <input ng-model="filtro" ng-model-options="{debounce: 500}" type="text" class="form-control" placeholder="Filtrar">
+                    </form>
+                </div><!-- fim col-md-12 -->
+            </div><!-- fim row -->
+
+
+            <div class="row">
+                <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
+                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}" />
+                </meu-painel><!-- fim panel -->
+            </div>
         
-            <meu-painel ng-repeat="foto in fotos" titulo="{{foto.titulo}}">
-                <img class="img-resposive center-block" src="{{foto.url}}" alt="{{foto.titulo}}" />
-            </meu-painel><!-- fim panel -->
-            
         </div> <!-- fim container -->        
     </body>
 </html>

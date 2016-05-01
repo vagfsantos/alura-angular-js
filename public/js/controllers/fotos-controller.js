@@ -5,6 +5,7 @@ model.controller('FotosController', function($scope, $http){
 	console.log($scope);
 	
 	$scope.fotos = [];
+	$scope.filtro = '';
 
 	$http.get('v1/fotos')
 	.success(function(fotos){
