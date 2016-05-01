@@ -8,7 +8,8 @@ angular.module('alurapic')
 	});
 
 	$routeProvider.when('/fotos/new', {
-		templateUrl: 'partials/foto.html'
+		templateUrl: 'partials/foto.html',
+		controller: 'FotoControllerCadastro'
 	});
 
 	$routeProvider.otherwise({ redirectTo: '/fotos' });
