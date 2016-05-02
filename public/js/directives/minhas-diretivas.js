@@ -9,7 +9,6 @@ angular.module('minhasDiretivas', [])
 	}
 
 	ddo.transclude = true;
-
 	ddo.templateUrl = 'js/directives/meu-painel.html';
 
 	return ddo;
