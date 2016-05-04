@@ -12,5 +12,10 @@ angular.module('alurapic')
 		controller: 'FotoControllerCadastro'
 	});
 
+	$routeProvider.when('/fotos/edit/:fotoId', {
+		templateUrl: 'partials/foto.html',
+		controller: 'FotoControllerCadastro'
+	});
+
 	$routeProvider.otherwise({ redirectTo: '/fotos' });
 });
