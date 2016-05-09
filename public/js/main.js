@@ -1,1 +1,1 @@
-angular.module('alurapic', ['minhasDiretivas', 'ngAnimate', 'ngRoute']);
+angular.module('alurapic', ['minhasDiretivas', 'ngAnimate', 'ngRoute', 'meusServicos']);

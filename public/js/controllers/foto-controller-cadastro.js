@@ -1,14 +1,14 @@
 angular.module('alurapic')
-.controller('FotoControllerCadastro', function($scope, $http, $routeParams){
+.controller('FotoControllerCadastro', function($scope, $routeParams, recursoFoto){
+
 	$scope.foto = {}
 	$scope.mensagem = '';
 
+
 	if($routeParams.fotoId){
-		$http.get('/v1/fotos/'+$routeParams.fotoId)
-		.success(function(foto){
+		recursoFoto.get({fotoId: $routeParams.fotoId}, function(foto){
 			$scope.foto = foto;
-		})
-		.error(function(error){
+		}, function(error){
 			console.log(error);
 			$scope.mensagem = 'Não foi possível carregar a foto.'
 		});
@@ -17,25 +17,20 @@ angular.module('alurapic')
 	$scope.submeter = function(){
 		if($scope.formulario.$valid){
 			if($scope.foto._id){
-				
-				$http.put('v1/fotos/'+$scope.foto._id, $scope.foto)
-				.success(function(){
+				recursoFoto.update({fotoId: $scope.foto._id}, $scope.foto, function(){
 					$scope.mensagem = 'Foto cadastrada com sucesso';
-				})
-				.error(function(erro){
+				}, function(error){
 					$scope.mensagem = 'não foi possivel alterar a foto';
-					console.log(erro);
+					console.log(error);
 				});
 
 			} else{
-				$http.post('v1/fotos', $scope.foto)
-				.success(function(){
+				recursoFoto.save($scope.foto, function(){
 					$scope.foto = {}
 					$scope.mensagem = 'Foto cadastrada com sucesso';
-				})
-				.error(function(erro){
+				}, function(error){
 					$scope.mensagem = 'não foi possivel incluir a foto';
-					console.log(erro);
+					console.log(error);
 				});
 			}
 		}

@@ -1,6 +1,6 @@
 var model = angular.module('alurapic');
 
-model.controller('FotosController', function($scope, $http){
+model.controller('FotosController', function($scope, recursoFoto){
 	console.log(arguments);
 	console.log($scope);
 	
@@ -8,28 +8,33 @@ model.controller('FotosController', function($scope, $http){
 	$scope.filtro = '';
 	$scope.mensagem = '';
 
-	$http.get('v1/fotos')
-	.success(function(fotos){
+	recursoFoto.query(function(fotos){
 		$scope.fotos = fotos;
-	})
-	.error(function(erro){
-		console.log(erro);
+	}, function(error){
+		console.log(error);
 	});
+
+	// $http.get('v1/fotos')
+	// .success(function(fotos){
+	// 	$scope.fotos = fotos;
+	// })
+	// .error(function(erro){
+	// 	console.log(erro);
+	// });
 	
 
 	$scope.remover = function(foto){
-		$http.delete('v1/fotos/'+foto._id)
-		.success(function(){
+		recursoFoto.delete({fotoId : foto._id}, function(){
 			var indiceFoto = $scope.fotos.indexOf(foto);
 			$scope.fotos.splice(indiceFoto, 1);
-
 			$scope.mensagem = 'Foto '+ foto.titulo + ' foi removida com sucesso';
 			console.log('Foto '+ foto.titulo + ' foi removida com sucesso');
-		})
-		.error(function(error){
+
+		}, function(){
 			console.log(error);
 			$scope.mensagem = 'Erro ao apagar a foto '+ foto.titulo;
 			console.log('Erro ao apagar a foto '+ foto.titulo);
+
 		});
 	};
 
