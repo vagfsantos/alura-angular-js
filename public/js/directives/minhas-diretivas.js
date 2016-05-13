@@ -28,7 +28,6 @@ angular.module('minhasDiretivas', [])
 	return ddo;
 })
 
-
 .directive('meuBotaoPerigo', function(){
 	var ddo = {}
 
@@ -39,6 +38,30 @@ angular.module('minhasDiretivas', [])
 	}
 
 	ddo.template = '<button ng-click="acao(foto)" class="btn btn-danger btn-block">{{nome}}</button>';
+
+	return ddo;
+})
+
+.directive('meuFocus', function(){
+	var ddo = {};
+	ddo.restrict = 'A';
+	ddo.scope = {
+		focado: '='
+	};
+
+	ddo.link = function(scope, element){
+		// scope.$watch('focado', function(){
+		// 	if( scope.focado ){
+		// 		console.log(element);
+		// 		element[0].focus();
+		// 		scope.focado = false;
+		// 	}
+		// });
+
+		scope.$on('fotoCadastrada', function(){
+			element[0].focus();
+		});
+	}
 
 	return ddo;
 });
